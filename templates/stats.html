@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block title %} Statistics: Not just a URL Shortener
+{% endblock title %} {% block body %} {% if warning %}
+    <p style="margin-left: 38%; color: red">
+        Enter a valid Shortened URL
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-emoji-dizzy"
+                viewBox="0 0 16 16">
+            <path
+                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0
+      16z"
+            />
+            <path
+                    d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1
+        .708.708l-.647.646.647.646a.5.5 0 0
+        1-.708.708l-.646-.647-.646.647a.5.5 0 1
+        1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0
+        1 .708 0l.646.647.646-.647a.5.5 0 1 1
+        .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5
+        7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0
+        0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+            />
+        </svg>
+    </p>
+{% endif %} {% if not basic %} {% if url not in data %}
+    <p style="margin-left: 35%; color: red">
+        This short URL has not been produced
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-emoji-dizzy"
+                viewBox="0 0 16 16">
+            <path
+                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8
+          0 0 0 0 16z"
+            />
+            <path
+                    d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5
+            0 0 1 .708.708l-.647.646.647.646a.5.5 0 0
+            1-.708.708l-.646-.647-.646.647a.5.5 0 1
+            1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5
+            0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1
+            .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5
+            7.207l-.646.647a.5.5 0 1
+            1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10
+            11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+            />
+        </svg>
+    </p>
+{% else %} {% if data[url]['count'] %}
+        <div style="margin-left: 37%; margin-top: 1%; padding-bottom: 0.5%">
+            <p>Number of times redirect took place: {{ data[url]['count'] }}</p>
+            <p>IP Address of visitors: {{ data[url]['vis'] }}</p>
+            <a href="{{ url_for('.detailed', surl=url) }}" style="margin-left: 7%">Detailed
+                View</a>
+        </div>
+    {% else %}
+        <p>No redirect took place till now</p>
+    {% endif %} {% endif %} {% endif %}
+    <div style="margin-left: 30%; margin-right: 40%; margin-top: 1%">
+        <form action="{{ url_for('.get_count') }}" method="post" class="mb-3">
+            <div class="mb-3">
+                <label for="url" class="form-label align-center">Enter the Short
+                    URL:</label>
+                <input
+                        type="text"
+                        class="form-control align-center"
+                        id="url"
+                        name="URL"
+                        placeholder="{{ request.base_url[:-4] }}q=ggle"
+                />
+            </div>
+            <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="margin-top: 3%; margin-left: 40%">
+                Submit
+            </button>
+        </form>
+        <div style="margin-top: 9%" class="bg-light">
+            <p style="text-align: center">Get the detailed information about:</p>
+            <li>Number of time the link was clicked</li>
+            <li>List of IP Address that clicked the link</li>
+            <li>Count of which IP Address clicked the click how many times</li>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Detailed stats of {{ surl }}: Not just a URL Shortener
+{% endblock %}
+
+{% block body %}
+    <div style="margin-left: 43%">
+        <p style="margin-left: 5%"><b>Total redirects:</b> {{ data[surl]['count'] }}</p>
+        <p><b>Number of unique IP visitors:</b> {{ visitors }}</p>
+    </div>
+    <div class="table-responsive" style="margin-left: 30%; margin-right: 30%;
+    margin-top: 1%">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">IP Address</th>
+                <th scope="col">Count</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for ip in data[surl]['vis'] %}
+                <tr>
+                    <td>{{ ip }}</td>
+                    <td>{{ data[surl]['vis'][ip] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

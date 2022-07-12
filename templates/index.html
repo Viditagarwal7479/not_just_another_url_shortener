@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %} Not Just a URL Shorter {% endblock title %}
+{% block body %}
+    {% if saved %}
+        <p style="margin-left: 41%; color: green">
+            Short URL created successfully
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    fill="currentColor"
+                    class="bi bi-emoji-wink"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm1.757-.437a.5.5 0 0 1 .68.194.934.934 0 0 0 .813.493c.339 0 .645-.19.813-.493a.5.5 0 1 1 .874.486A1.934 1.934 0 0 1 10.25 7.75c-.73 0-1.356-.412-1.687-1.007a.5.5 0 0 1 .194-.68z"
+                />
+            </svg>
+        </p>
+        <a style="margin-left: 39%" href={{ a }} class="alert-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60"
+                 height="45"
+                 fill="currentColor"
+                 class="bi bi-check2-all"
+                 viewBox="9 0 3 16">
+                <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
+                <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+            </svg>
+            {{ a }}
+        </a>
+        <br/>
+    {% else %} {% if warning == 2 %}
+        <p style="margin-left: 29%; color: red">
+            The shortened URL that you have requested is already exists try another short
+            URL
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% elif warning == 1 %}
+        <p style="margin-left: 35%; color: red">
+            You must enter both the long and the desired shortened URL.
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% elif warning == 3 %}
+        <p style="margin-left: 37%; color: red">
+            Long URL must start with <b>http</b> or <b>https</b>
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% elif warning == 4 %}
+        <p style="margin-left: 37%; color: red">
+            Short URL must have only alphanumeric characters
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% endif %}
+        <div style="margin-left: 27%; margin-right: 33%; margin-top: 1%">
+            <form action="{{ url_for('.forms') }}" method="post" class="mb-3">
+                <div class="mb-3">
+                    <label for="org" class="form-label align-center"
+                    >Enter the long URL</label
+                    >
+                    <input
+                            type="text"
+                            class="form-control align-center"
+                            id="org"
+                            placeholder="https://www.google.com"
+                            name="Enter original url"
+                    />
+                </div>
+                <div class="md-3">
+                    <label for="dup" class="form-label"
+                    >Enter the preference for short URL code(only alphanumeric characters
+                        a-z, A-Z, 0-9)</label
+                    >
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="dup"
+                            placeholder="ggle"
+                            name="Enter short version"
+                    />
+                </div>
+                <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="margin-top: 3%; margin-left: 40%"
+                >
+                    Submit
+                </button>
+            </form>
+            <p style="margin-top: 6%; text-align: center" class="bg-light center">
+                If the Short URL code preference is <b>ggle</b> then the Short URL produced
+                will be <b>{{ request.base_url[:-4] }}/q=ggle</b> if ggle code is available
+            </p>
+        </div>
+
+    {% endif %}
+{% endblock body %}
