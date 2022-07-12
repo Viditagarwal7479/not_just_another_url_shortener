@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, jsonify
 
 app = Flask(__name__)
 data = {}
@@ -34,10 +34,14 @@ def forms():
 
 @app.route('/q=<url>')
 def redirect_page(url):
-    if request.remote_addr in data[url]['vis']:
-        data[url]['vis'][request.remote_addr] = data[url]['vis'][request.remote_addr] + 1
+    url = url.strip()
+    if url not in data:
+        return render_template('index.html', warning=5)
+    ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+    if ip in data[url]['vis']:
+        data[url]['vis'][ip] = data[url]['vis'][ip] + 1
     else:
-        data[url]['vis'][request.remote_addr] = 1
+        data[url]['vis'][ip] = 1
     data[url]['count'] = data[url]['count'] + 1
     return redirect(data[url]['url'])
 
@@ -55,6 +59,7 @@ def get_count():
 
 @app.route('/detailed?surl=<surl>')
 def detailed(surl):
+    surl = surl.strip()
     return render_template('detail.html', surl=surl, data=data, visitors=len(data[surl]['vis']))
 
 
