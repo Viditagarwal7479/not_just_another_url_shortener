@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Upload File: Not Just a URL Shortener
+{% endblock %}
+
+{% block body %}
+    {% if warning == 1 %}
+        <p style="text-align: center; color: red">
+            Upload file with valid name<br>
+            Empty file or file without a file name detected
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% elif warning == 2 %}
+        <p style="text-align: center; color: red">
+            Uploaded file should be of type <b>'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'</b>
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
+                />
+            </svg>
+        </p>
+    {% elif warning == -1 %}
+        <p style="text-align: center; color: #2dc400; margin-top: 1%">
+            Your file has been uploaded
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    fill="currentColor"
+                    class="bi bi-emoji-wink"
+                    viewBox="0 0 16 16"
+            >
+                <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                        d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm1.757-.437a.5.5 0 0 1 .68.194.934.934 0 0 0 .813.493c.339 0 .645-.19.813-.493a.5.5 0 1 1 .874.486A1.934 1.934 0 0 1 10.25 7.75c-.73 0-1.356-.412-1.687-1.007a.5.5 0 0 1 .194-.68z"
+                />
+            </svg>
+        <br>
+        This is your shareable URL for the file <br>
+            <a style="margin-top: 3%" href="{{ link }}">{{ link }}</a>
+        </p>
+    {% endif %}
+    <div style="margin-left: 35%; margin-right: 35%; margin-top: 6%">
+            <form action="{{ url_for('.upload') }}" method="post" class="mb-3" enctype="multipart/form-data">
+
+                <div class="md-3" style="text-align: center">
+                    <label style="margin-right:3%" for="key">KEY</label>
+                    <input style="margin-right:6%" type="text" id="key" name="key"><br>
+                    <input style="margin-top: 3%; margin-left: 6%" type="file" name="file">
+                </div>
+                <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="margin-top: 6%; margin-left: 40%"
+                        value="Upload"
+                >
+                    Upload
+                </button>
+            </form>
+            <p style="margin-top: 6%; text-align: center" class="bg-light center">
+                Choose the file from your local system that you want to upload.<br>
+                Uploaded files will be deleted after 3 Days.<br>
+            </p>
+        </div>
+
+
+
+{% endblock %}

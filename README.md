@@ -1,6 +1,4 @@
 # Not Just a Normal URL Shortener
----
-**[https://viditagarwal.pythonanywhere.com/](https://viditagarwal.pythonanywhere.com/)**
 
 This is a repo for a web app which can make short URL masks for long URLs.
 
@@ -12,6 +10,7 @@ This is a repo for a web app which can make short URL masks for long URLs.
   - *Number of time the short link was clicked.*
   - *List of IP Address that clicked the short link.*
   - *Count of which IP Address clicked the short link how many times.*
+  - Quick image, gif and pdf share across the web with short links.
 
 # TODO:
   - Add a database
